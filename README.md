@@ -72,7 +72,7 @@ The Bot responses immediately in the same Channel with a list of all Triggers.
 >
 > \> Liste aller Trigger:
 > 
-> \- barne
+> \> \- barne
 ### list+
 Parameters: `none`
 
