@@ -68,6 +68,7 @@ public class OnMessageCreateEvent {
         String trigger = content.split(" ")[2];
         String message = content.substring(content.indexOf(content.split(" ")[3]), content.length()).strip();
         basicResponseManager.add(new ChatResponse(trigger, message));
+        basicResponseManager.save(Locations.CHATRESPONSE.path);
         return event.getChannel().flatMap(channel -> channel.createMessage("Trigger erfolgreich erstellt!"));
     }
 
@@ -80,6 +81,7 @@ public class OnMessageCreateEvent {
         String content = event.getContent();
         String trigger = content.split(" ")[2];
         basicResponseManager.remove(trigger);
+        basicResponseManager.save(Locations.CHATRESPONSE.path);
         return event.getChannel().flatMap(channel -> channel.createMessage("Trigger erfolgreich entfernt!"));
     }
 
