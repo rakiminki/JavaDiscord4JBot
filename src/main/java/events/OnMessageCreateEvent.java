@@ -9,6 +9,8 @@ import manager.ResponseManager;
 import model.ChatResponse;
 import reactor.core.publisher.Mono;
 
+import java.util.Map;
+
 public class OnMessageCreateEvent {
     private static ResponseManager basicResponseManager = ResponseManager.accessMap.get("basic");
 
@@ -32,6 +34,13 @@ public class OnMessageCreateEvent {
                         return commandSave(message);
                     case "REMOVE":
                         return commandRemove(message);
+                    case "LIST":
+                        return commandList(message);
+                    case "LIST+":
+                        return commandExtendedList(message);
+                    case "HELP":
+                        return commandHelp(message);
+
 
                 }
 
@@ -61,14 +70,38 @@ public class OnMessageCreateEvent {
         basicResponseManager.add(new ChatResponse(trigger, message));
         return event.getChannel().flatMap(channel -> channel.createMessage("Trigger erfolgreich erstellt!"));
     }
+
     private static Mono commandSave(Message event) {
         basicResponseManager.save(Locations.CHATRESPONSE.path);
         return event.getChannel().flatMap(channel -> channel.createMessage("Trigger erfolgreich gespeichert!"));
     }
-    private static Mono commandRemove(Message event){
+
+    private static Mono commandRemove(Message event) {
         String content = event.getContent();
         String trigger = content.split(" ")[2];
         basicResponseManager.remove(trigger);
         return event.getChannel().flatMap(channel -> channel.createMessage("Trigger erfolgreich entfernt!"));
+    }
+
+    private static Mono commandList(Message event) {
+
+        StringBuilder message = new StringBuilder("Liste aller Trigger: \n");
+        for (String trigger : basicResponseManager.getTrigger()) {
+            message.append("- " + trigger + "\n");
+        }
+        return event.getChannel().flatMap(channel -> channel.createMessage(message.toString()));
+    }
+
+    private static Mono commandExtendedList(Message event) {
+
+        StringBuilder message = new StringBuilder("Liste aller Trigger mit Antwort: \n");
+        for (Map.Entry<String, ChatResponse> entry : basicResponseManager.getTriggersWithResponse()) {
+            message.append("- " + entry.getKey() + " --> " + entry.getValue().getMessage() + "\n");
+        }
+        return event.getChannel().flatMap(channel -> channel.createMessage(message.toString()));
+    }
+
+    private static Mono commandHelp(Message event) {
+        return event.getChannel().flatMap(channel -> channel.createMessage("Für eine komplette Dokumentation aller Befehle gehe auf folgende Seite: https://github.com/rakiminki/TollerBotv2"));
     }
 }

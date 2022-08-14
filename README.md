@@ -4,12 +4,15 @@
 ## Available Commands
 
 
-| Commands | short description | Parameters |
-| ------ | ------ | ------ |
-| ping | Network/Availability Check |0|
-| add | Add Reaction with Trigger and Message |2|| 
-| remove | Removes Reaction with Trigger |1|
-| save  | Saves Changes to Reactions |0|
+| Commands | short description                      | Parameters |
+|----------|----------------------------------------| ------ |
+| ping     | Network/Availability Check             |0|
+| add      | Add Reaction with Trigger and Response |2|| 
+| remove   | Removes Reaction with Trigger          |1|
+| save     | Saves Changes to Reactions             |0|
+| list     | List all Triggers                      |0|
+| list+    | List all Triggers with Response        |0|
+| help     | Posts a link to the GitHub Repo        |0|
 ### Prefix
 The Standard Prefix is `toll`
 ## Commands
@@ -58,6 +61,39 @@ The Bot responses immediately in the same Channel with `Trigger erfolgreich gesp
 > \< toll save
 >
 > \> Trigger erfolgreich gespeichert!
+### list
+Parameters: `none`
+
+The Bot responses immediately in the same Channel with a list of all Triggers.
+> example:
+>
+> \< toll list
+>
+> \> Liste aller Trigger:
+> 
+> \- barne
+### list+
+Parameters: `none`
+
+The Bot responses immediately in the same Channel with a list of all Triggers and their corresponding message.
+> example:
+>
+> \< toll list+
+>
+> \> Liste aller Trigger mit Antwort:
+>
+> \- barne --> Schokolade
+### help
+Parameters: `none`
+
+The Bot responses immediately in the same Channel with the Link to the GitHub Repository.
+> example:
+>
+> \< toll help
+>
+> \> Für eine komplette Dokumentation aller Befehle gehe auf folgende Seite: https://github.com/rakiminki/TollerBotv2
+
+
 
 ## License
 
