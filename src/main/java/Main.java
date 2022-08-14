@@ -1,12 +1,15 @@
+import enums.Secret;
 import discord4j.core.DiscordClient;
 import discord4j.core.GatewayDiscordClient;
 
 import events.OnMessageCreateEvent;
 import events.OnReady;
+import manager.ResponseManager;
 import reactor.core.publisher.Mono;
 
 public class Main {
     public static void main(String[] args) {
+        new ResponseManager("basic","responses-basic.data");
         DiscordClient offlineClient = DiscordClient.create(Secret.DISCORD_TOKEN.value);
         Mono<Void> client = registerActionHandlers(offlineClient);
         client.block();
@@ -17,10 +20,10 @@ public class Main {
             // onReady
             Mono onReady = OnReady.call(gateway);
 
-            // onMessage
-            Mono commandPing = OnMessageCreateEvent.call(gateway);
+            // onMessageCreate
+            Mono onMessageCreate = OnMessageCreateEvent.call(gateway);
 
-            return onReady.and(commandPing);
+            return onReady.and(onMessageCreate);
         });
         return client;
     }
