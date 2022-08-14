@@ -1,3 +1,4 @@
+import enums.Locations;
 import enums.Secret;
 import discord4j.core.DiscordClient;
 import discord4j.core.GatewayDiscordClient;
@@ -9,7 +10,7 @@ import reactor.core.publisher.Mono;
 
 public class Main {
     public static void main(String[] args) {
-        new ResponseManager("basic","responses-basic.data");
+        new ResponseManager("basic", Locations.CHATRESPONSE.path);
         DiscordClient offlineClient = DiscordClient.create(Secret.DISCORD_TOKEN.value);
         Mono<Void> client = registerActionHandlers(offlineClient);
         client.block();

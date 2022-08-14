@@ -4,6 +4,7 @@ import discord4j.core.GatewayDiscordClient;
 import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.object.entity.Message;
 import enums.Config;
+import enums.Locations;
 import manager.ResponseManager;
 import model.ChatResponse;
 import reactor.core.publisher.Mono;
@@ -27,6 +28,8 @@ public class OnMessageCreateEvent {
                         return commandPing(message);
                     case "ADD":
                         return commandAdd(message);
+                    case "SAVE":
+                        return commandSave(message);
 
 
                 }
@@ -56,6 +59,10 @@ public class OnMessageCreateEvent {
         String message = content.substring(content.indexOf(content.split(" ")[3]), content.length()).strip();
         basicResponseManager.add(new ChatResponse(trigger, message));
         return event.getChannel().flatMap(channel -> channel.createMessage("Trigger erfolgreich erstellt!"));
+    }
+    private static Mono commandSave(Message event) {
+        basicResponseManager.save(Locations.CHATRESPONSE.path);
+        return event.getChannel().flatMap(channel -> channel.createMessage("Trigger erfolgreich gespeichert!"));
     }
 
 }
