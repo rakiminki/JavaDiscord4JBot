@@ -30,7 +30,8 @@ public class OnMessageCreateEvent {
                         return commandAdd(message);
                     case "SAVE":
                         return commandSave(message);
-
+                    case "REMOVE":
+                        return commandRemove(message);
 
                 }
 
@@ -64,5 +65,10 @@ public class OnMessageCreateEvent {
         basicResponseManager.save(Locations.CHATRESPONSE.path);
         return event.getChannel().flatMap(channel -> channel.createMessage("Trigger erfolgreich gespeichert!"));
     }
-
+    private static Mono commandRemove(Message event){
+        String content = event.getContent();
+        String trigger = content.split(" ")[2];
+        basicResponseManager.remove(trigger);
+        return event.getChannel().flatMap(channel -> channel.createMessage("Trigger erfolgreich entfernt!"));
+    }
 }
