@@ -4,15 +4,15 @@
 ## Available Commands
 
 
-| Commands | short description                      | Parameters |
-|----------|----------------------------------------| ------ |
-| ping     | Network/Availability Check             |0|
-| add      | Add Reaction with Trigger and Response |2|| 
-| remove   | Removes Reaction with Trigger          |1|
-| save     | Saves Changes to Reactions             |0|
-| list     | List all Triggers                      |0|
-| list+    | List all Triggers with Response        |0|
-| help     | Posts a link to the GitHub Repo        |0|
+| Commands      | short description                      | Parameters |
+|---------------|----------------------------------------| ------ |
+| ping          | Network/Availability Check             |0|
+| add           | Add Reaction with Trigger and Response |2|| 
+| remove        | Removes Reaction with Trigger          |1|
+| list          | List all Triggers                      |0|
+| list+         | List all Triggers with Response        |0|
+| help          | Posts a link to the GitHub Repo        |0|
+
 ### Prefix
 The Standard Prefix is `toll`
 ## Commands
@@ -28,8 +28,7 @@ The Bot responses in the same Channel with `Pong!` if he is online.
 ### add
 Parameters: `trigger` , `message`
 On every (non Command) ChatMessage containing `trigger` the bot will respond from now on with `message`\
-The Bot responses immediately in the same Channel with `Trigger erfolgreich erstellt!` if the command worked.\
-**Warning:** The Triggers resets when the bot restarts
+The Bot responses immediately in the same Channel with `Trigger erfolgreich erstellt!` if the command worked.
 > example:
 >
 > \< toll add barne Schokolade
@@ -53,16 +52,6 @@ The Bot responses immediately in the same Channel with `Trigger erfolgreich entf
 >
 > (no response)
 
-<>  ### save
-<> Parameters: `none`
-<> [//]: #The bot will persist (save) all Changes made in current Session regarding `Triggers and Responses`.\
-<> The next time the Bot restart he loads the most recent Save.\
-<> The Bot responses immediately in the same Channel with `Trigger erfolgreich gespeichert!` if the command worked.
-<> > example:
-<> >
-<> > \< toll save
-<> >
-<> > \> Trigger erfolgreich gespeichert!
 ### list
 Parameters: `none`
 
@@ -94,8 +83,17 @@ The Bot responses immediately in the same Channel with the Link to the GitHub Re
 > \< toll help
 >
 > \> Für eine komplette Dokumentation aller Befehle gehe auf folgende Seite: https://github.com/rakiminki/TollerBotv2
-
-
+## Legacy Commands
+### save 
+Parameters: `none`
+The bot will persist (save) all Changes made in current Session regarding `Triggers and Responses`.\
+The next time the Bot restart he loads the most recent Save.\
+The Bot responses immediately in the same Channel with `Trigger erfolgreich gespeichert!` if the command worked.
+> example:
+>
+> \< toll save
+>
+> \> Trigger erfolgreich gespeichert!
 
 ## License
 
