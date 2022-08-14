@@ -95,6 +95,8 @@ The Bot responses immediately in the same Channel with `Trigger erfolgreich gesp
 >
 > \> Trigger erfolgreich gespeichert!
 
+**Legacy Note:** The Bots saved automatically on the `add` and `delete` command. **Save is no longer necessary**.
+
 ## License
 
 MIT
