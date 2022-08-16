@@ -1,3 +1,7 @@
+import Commands.*;
+import discord4j.core.event.domain.interaction.ChatInputInteractionEvent;
+import discord4j.discordjson.json.ApplicationCommandData;
+import discord4j.discordjson.json.ApplicationCommandRequest;
 import enums.Locations;
 import enums.Secret;
 import discord4j.core.DiscordClient;
@@ -8,27 +12,41 @@ import events.OnReady;
 import manager.ResponseManager;
 import reactor.core.publisher.Mono;
 
+import java.util.Map;
+
 public class Main {
     public static void main(String[] args) {
         new ResponseManager("basic", Locations.CHATRESPONSE.path);
         DiscordClient offlineClient = DiscordClient.create(Secret.DISCORD_TOKEN.value);
-        Mono<Void> client = registerActionHandlers(offlineClient);
+        Mono<Void> client = registerEvents(offlineClient);
         client.block();
     }
 
-    public static Mono<Void> registerActionHandlers(DiscordClient offlineClient) {
-        Mono client = offlineClient.withGateway((GatewayDiscordClient gateway) -> {
+    public static Mono<Void> registerEvents(DiscordClient offlineClient) {
+        Mono client = offlineClient.withGateway((GatewayDiscordClient gatewayClient) -> {
             // onReady
-            Mono onReady = OnReady.call(gateway);
+            Mono onReady = OnReady.call(gatewayClient);
 
             // onMessageCreate
-            Mono onMessageCreate = OnMessageCreateEvent.call(gateway);
+            Mono onMessageCreate = OnMessageCreateEvent.call(gatewayClient);
+
+            // Slash Commands
+            registerSlashCommands(gatewayClient);
 
             return onReady.and(onMessageCreate);
         });
         return client;
     }
 
+    private static void registerSlashCommands(GatewayDiscordClient gatewayClient) {
+        Ping.slashCommand(gatewayClient);
+        Add.slashCommand(gatewayClient);
+        Remove.slashCommand(gatewayClient);
+        List.slashCommand(gatewayClient);
+        ListPlus.slashCommand(gatewayClient);
+        Help.slashCommand(gatewayClient);
+
+    }
 
 
 }

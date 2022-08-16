@@ -83,19 +83,6 @@ The Bot responses immediately in the same Channel with the Link to the GitHub Re
 > \< toll help
 >
 > \> Für eine komplette Dokumentation aller Befehle gehe auf folgende Seite: https://github.com/rakiminki/TollerBotv2
-## Legacy Commands
-### save 
-Parameters: `none`
-The bot will persist (save) all Changes made in current Session regarding `Triggers and Responses`.\
-The next time the Bot restart he loads the most recent Save.\
-The Bot responses immediately in the same Channel with `Trigger erfolgreich gespeichert!` if the command worked.
-> example:
->
-> \< toll save
->
-> \> Trigger erfolgreich gespeichert!
-
-**Legacy Note:** The Bots saved automatically on the `add` and `delete` command. **Save is no longer necessary**.
 
 ## License
 
