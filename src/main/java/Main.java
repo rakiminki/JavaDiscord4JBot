@@ -1,18 +1,13 @@
 import Commands.*;
-import discord4j.core.event.domain.interaction.ChatInputInteractionEvent;
-import discord4j.discordjson.json.ApplicationCommandData;
-import discord4j.discordjson.json.ApplicationCommandRequest;
 import enums.Locations;
-import enums.Secret;
 import discord4j.core.DiscordClient;
 import discord4j.core.GatewayDiscordClient;
 
+import enums.Secret;
 import events.OnMessageCreateEvent;
 import events.OnReady;
 import manager.ResponseManager;
 import reactor.core.publisher.Mono;
-
-import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -45,6 +40,8 @@ public class Main {
         List.slashCommand(gatewayClient);
         ListPlus.slashCommand(gatewayClient);
         Help.slashCommand(gatewayClient);
+        Hunt.slashCommand(gatewayClient);
+        OpenAi.slashCommand(gatewayClient);
 
     }
 

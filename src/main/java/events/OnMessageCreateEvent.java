@@ -39,6 +39,10 @@ public class OnMessageCreateEvent {
                         return ListPlus.command(message);
                     case "HELP":
                         return Help.command(message);
+                    case "HUNT":
+                        return Hunt.command(message);
+                    case "AI":
+                        return OpenAi.command(message);
 
 
                 }
