@@ -45,21 +45,24 @@ public class OpenAi {
                 String prompt = CommandHelper.getStringFromParameter("prompt", event);
 
                 return event
-                        .reply(responseString(prompt))
-                        .withEphemeral(false);
+                        .deferReply().then(methodThatTakesALongTime(event,prompt));
             }
             return null;
         }).subscribe();
 
         // Publish it to Guild/Global
         gatewayClient.getRestClient().getApplicationService()
-                //  .createGlobalApplicationCommand(applicationId,pingRequest)
-                .createGuildApplicationCommand(applicationId, 821048022011609109l, pingRequest)
+                  .createGlobalApplicationCommand(applicationId,pingRequest)
+              //  .createGuildApplicationCommand(applicationId, 821048022011609109l, pingRequest)
                 .subscribe();
 
     }
 
+    private static Mono<Message> methodThatTakesALongTime(ChatInputInteractionEvent event,String prompt) {
+        // Do logic that takes awhile, then return
 
+        return event.createFollowup(responseString(prompt));
+    }
 
     private static String responseString(String prompt) {
         return AiTest.answer(prompt,"1");

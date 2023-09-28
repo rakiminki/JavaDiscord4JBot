@@ -54,6 +54,7 @@ public class Add {
                 String trigger = CommandHelper.getStringFromParameter("trigger", event);
                 String response = CommandHelper.getStringFromParameter("response", event);
                 addAndSave(trigger, response);
+                String userName = event.getInteraction().getMember().orElseThrow().getUsername();
                 return event
                         .reply(trigger + " ---> " + response)
                         .withEphemeral(false);
@@ -63,8 +64,8 @@ public class Add {
 
         // Publish it to Guild/Global
         gatewayClient.getRestClient().getApplicationService()
-                //  .createGlobalApplicationCommand(applicationId,pingRequest)
-                .createGuildApplicationCommand(applicationId, 821048022011609109l, pingRequest)
+                .createGlobalApplicationCommand(applicationId,pingRequest)
+                //.createGuildApplicationCommand(applicationId, 821048022011609109l, pingRequest)
                 .subscribe();
 
     }

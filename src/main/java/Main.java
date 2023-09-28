@@ -14,7 +14,9 @@ public class Main {
         new ResponseManager("basic", Locations.CHATRESPONSE.path);
         DiscordClient offlineClient = DiscordClient.create(Secret.DISCORD_TOKEN.value);
         Mono<Void> client = registerEvents(offlineClient);
+
         client.block();
+
     }
 
     public static Mono<Void> registerEvents(DiscordClient offlineClient) {
@@ -42,7 +44,6 @@ public class Main {
         Help.slashCommand(gatewayClient);
         Hunt.slashCommand(gatewayClient);
         OpenAi.slashCommand(gatewayClient);
-
     }
 
 
